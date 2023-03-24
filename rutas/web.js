@@ -4,3 +4,5 @@ const router = express.Router()
 router.get('/', (peticion, respuesta) => {
     respuesta.send('Hola mundo')
 })
+
+module.exports = router
