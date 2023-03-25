@@ -1,30 +1,40 @@
 const modeloPublicacion = require('../modelos/publicacion.js')
 var publicaciones = {}
 
-function generarUrl(idPub, tituloPub, autoresPub, fechaPub) {
-    return `/publicaciones/${idPub}/${tituloPub}/${autoresPub}/${fechaPub}`
+let idC = 0
+function generarUrlBusqueda(tituloPub, autoresPub, fechaPub) {
+    return `/publicaciones/${tituloPub}/${autoresPub}/${fechaPub}`
+}
+
+function generarUrlRegistro(tituloPub, autoresPub, editorialPub, fechaPub) {
+    return `/publicaciones/${tituloPub}/${autoresPub}/${editorialPub}/${fechaPub}`
+}
+
+function generarUrlBorrado(idPub, tituloPub, autoresPub, editorialPub, fechaPub) {
+    return `/publicaciones/${idPub}/${tituloPub}/${autoresPub}/${editorialPub}/${fechaPub}`
 }
 
 module.exports = {
 
     crearPublicacion: (peticion, respuesta) => {
-        if (publicaciones[peticion.params.id, peticion.params.titulo, peticion.params.autores, peticion.params.fecha]) {
+        if (publicaciones[peticion.params.titulo, peticion.params.editorial, peticion.params.editorial, peticion.params.autores, peticion.params.fecha]) {
             respuesta.status(409).json({
                 name: 'Publicacion repetida',
-                message: `Ya existe publicacion con ID: ${peticion.params.id}, con titulo: ${peticion.params.titulo}, autor(es): ${peticion.params.autores} y fecha: ${peticion.params.fecha}`
+                message: `Ya existe publicacion con titulo: ${peticion.params.titulo}, autor(es): ${peticion.params.autores}, 
+                editorial: ${peticion.params.editorial} y fecha: ${peticion.params.fecha}`
             })
             return
         }
-        publicaciones[peticion.params.id, peticion.params.titulo, peticion.params.autores, peticion.params.fecha] = modeloPublicacion(
-            peticion.params.id, peticion.params.titulo, peticion.params.autores, peticion.params.fecha
+        publicaciones[idC, peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha] = modeloPublicacion(
+            idC, peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha
         )
-        let urlNuevaPublicacion = generarUrl(peticion.id, peticion.params.titulo, peticion.params.autores, peticion.params.fecha)
+        let urlNuevaPublicacion = generarUrlRegistro(peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha)
         respuesta.status(201).send(urlNuevaPublicacion)
     },
 
     borrarPublicacion: (peticion, respuesta) => {
-        delete publicaciones[peticion.params.id, peticion.params.titulo, peticion.params.autores, peticion.params.fecha]
-        let urlPublicacionBorrada = generarUrl(peticion.params.id, peticion.params.titulo, peticion.params.autores, peticion.params.fecha)
+        delete publicaciones[peticion.params.id, peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha]
+        let urlPublicacionBorrada = generarUrlBorrado(peticion.params.id, peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha)
         respuesta.send(urlPublicacionBorrada)
     },
 
@@ -34,11 +44,11 @@ module.exports = {
 
             respuesta.status(404).json({
                 name: 'Publicacion inexistente',
-                message: `No existe ninguna publicación con ID ${peticion.params.id} y 
+                message: `No existe ninguna publicación con el
                 título ${peticion.params.titulo}`
             })
 
-            let pub = publicaciones[peticion.params.id, peticion.params.titulo, peticion.params.autores, peticion.params.fecha]
+            let pub = publicaciones[peticion.params.id, peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha]
             respuesta.render('publicacion', {publicacion: pub})
         }
     },
