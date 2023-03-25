@@ -6,16 +6,24 @@ router.get('/', (peticion, respuesta) => {
 })
 
 // Peticiones
-router.post('/publicaciones/:id/:titulo/:autores/:fecha', (peticion, respuesta) => {
+// Para crear una publicacion
+router.post('/publicaciones/:id/:titulo/:autores/:editorial/:fecha', (peticion, respuesta) => {
     controladorPublicaciones.crearPublicacion(peticion, respuesta)
 })
 
-router.delete('/publicaciones/:id:id/:titulo/:autores/:fecha', (peticion, respuesta) => {
+// Para eliminar una publicacion
+router.delete('/publicaciones/:id/:titulo/:autores/:editorial/:fecha', (peticion, respuesta) => {
     controladorPublicaciones.borrarPublicacion(peticion, respuesta)
 })
 
-router.get('/publicaciones/:id:id/:titulo/:autores/:fecha', (peticion, respuesta) => {
+// Para buscar una publicacion
+router.get('/publicaciones/:id/:titulo/:autores/:fecha', (peticion, respuesta) => {
     controladorPublicaciones.obtenerPublicacion(peticion, respuesta)
 })
+
+
+// Para actualizar (editar) una publicacion
+
+
 
 module.exports = router
