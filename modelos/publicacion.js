@@ -1,6 +1,8 @@
-module.exports = (idPub, tituloPub, autoresPub, fechaPub) => {
+// Modelo del Libro (Publicacion)
+module.exports = (idPub, tituloPub, editorialPub, autoresPub, fechaPub) => {
     
     let id = idPub.valueOf()
+    let editorial = editorialPub.valueOf()
     let titulo = tituloPub.valueOf()
     let autores = autoresPub.valueOf()
     let fecha = fechaPub.valueOf()
@@ -13,6 +15,9 @@ module.exports = (idPub, tituloPub, autoresPub, fechaPub) => {
         obtenerTitulo: () => {
             return titulo
         },
+        obtenerEditorial: () => {
+            return editorial
+        },
         obtenerAutores: () => {
             return autores
         },
@@ -20,7 +25,7 @@ module.exports = (idPub, tituloPub, autoresPub, fechaPub) => {
             return fecha
         },
         toString: () => {
-            return `${titulo}: ${autores}, ${fecha}`
+            return `${titulo}: ${autores}, ${editorial}, ${fecha}`
         }
     
     }
