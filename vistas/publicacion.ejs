@@ -1,0 +1,74 @@
+<%- include('comunes/encabezado') %>
+        
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+        <script src="/js/jquery-3.6.4.min.js"></script>
+        <title>
+            Detalle del libro <%= publicacion.obtenerId() %>
+        
+        </title>
+
+    </head>
+    <body>
+        <div>
+            <table class="table table-bordered table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Titulo</th>
+                        <th>Autor(es)</th>
+                        <th>Editorial</th>
+                        <th>Fecha de publicacion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><%= publicacion.obtenerId() %></td>
+                        <td><%= publicacion.obtenerTitulo() %></td>
+                        <td><%= publicacion.obtenerAutores() %></td>
+                        <td><%= publicacion.obtenerEditorial() %></td>
+                        <td><%= publicacion.obtenerFecha() %></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Boton de borrar registro de publicacion-->
+            <button class="btn btn-danger" id="eliminar_pub_btn" type="button" name="eliminar_pub_btn">
+                Borrar libro
+            </button>
+
+        </div>
+
+        <!-- Agregando el fotter -->
+        <%- include('comunes/pie_pagina') %>
+
+        <script>
+            $('eliminar_pub_btn').click(function(eventoClick) {
+
+                if(!confirm('¿Desea borrar el libro? Esta acción no puede deshacerse'))
+                    return
+                
+                let botonBorrar = $(this)
+                botonBorrar.prop('disabled', true)
+
+                $.ajax({
+                    type: 'DELETE',
+                    url: "/publicaciones<%= publicacion.obtenerTitulo() %>",
+                    success: function(respuesta) {
+                        alert(`El usuario "${respuesta}" ha sido eliminado`)
+                        window.location.href = '/'
+                    },
+                    error: function(ajax, mensaje) {
+                        alert('Ocurrió un problema al borrar el registro del libro')
+                        botonBorrar.prop('disabled', false)
+                    }
+
+                })
+            })
+        </script>
+
+
+        <!-- Cargando script de bootstrap-->
+        <script src="/js/bootstrap.min.js"></script>
+
+    </body>
+
