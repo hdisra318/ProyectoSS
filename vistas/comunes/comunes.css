@@ -42,12 +42,16 @@ footer span {
 
 /* Estilo de los botones al pasar el mouse por ellos */
 #registrar_publicacion_button:hover {
-  .button {background-color: #555555;} /* Color negro */
+  .button {
+    background-color: #555555;
+  } /* Color negro */
   color: white;
 }
 
 #eliminar_pub_btn:hover {
-  .button {background-color: #555555;} /* Color negro */
+  .button {
+    background-color: #555555;
+  } /* Color negro */
   color: white;
 }
 

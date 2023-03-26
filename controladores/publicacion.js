@@ -6,12 +6,12 @@ function generarUrlBusqueda(tituloPub, autoresPub, fechaPub) {
     return `/publicaciones/${tituloPub}/${autoresPub}/${fechaPub}`
 }
 
-function generarUrlRegistro(tituloPub, autoresPub, editorialPub, fechaPub) {
+function generarUrlRegistro(tituloPub, editorialPub, autoresPub, fechaPub) {
     return `/publicaciones/${tituloPub}/${autoresPub}/${editorialPub}/${fechaPub}`
 }
 
-function generarUrlBorrado(idPub, tituloPub, autoresPub, editorialPub, fechaPub) {
-    return `/publicaciones/${idPub}/${tituloPub}/${autoresPub}/${editorialPub}/${fechaPub}`
+function generarUrlBorrado(tituloPub, editorialPub, autoresPub, fechaPub) {
+    return `/publicaciones/${tituloPub}/${autoresPub}/${editorialPub}/${fechaPub}`
 }
 
 module.exports = {
@@ -25,7 +25,7 @@ module.exports = {
             })
             return
         }
-        publicaciones[idC, peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha] = modeloPublicacion(
+        publicaciones[peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha] = modeloPublicacion(
             idC, peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha
         )
         let urlNuevaPublicacion = generarUrlRegistro(peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha)
@@ -33,14 +33,14 @@ module.exports = {
     },
 
     borrarPublicacion: (peticion, respuesta) => {
-        delete publicaciones[peticion.params.id, peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha]
-        let urlPublicacionBorrada = generarUrlBorrado(peticion.params.id, peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha)
+        delete publicaciones[peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha]
+        let urlPublicacionBorrada = generarUrlBorrado(peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha)
         respuesta.send(urlPublicacionBorrada)
     },
 
     obtenerPublicacion: (peticion, respuesta) => {
 
-        if(!publicaciones[peticion.params.id, peticion.params.titulo, peticion.params.autores, peticion.params.fecha]) {
+        if(!publicaciones[peticion.params.titulo, peticion.params.autores, peticion.params.fecha]) {
 
             respuesta.status(404).json({
                 name: 'Publicacion inexistente',
@@ -48,7 +48,7 @@ module.exports = {
                 título ${peticion.params.titulo}`
             })
 
-            let pub = publicaciones[peticion.params.id, peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha]
+            let pub = publicaciones[peticion.params.titulo, peticion.params.autores, peticion.params.fecha]
             respuesta.render('publicacion', {publicacion: pub})
         }
     },

@@ -2,8 +2,8 @@
 module.exports = (idPub, tituloPub, editorialPub, autoresPub, fechaPub) => {
     
     let id = idPub.valueOf()
-    let editorial = editorialPub.valueOf()
     let titulo = tituloPub.valueOf()
+    let editorial = editorialPub.valueOf()
     let autores = autoresPub.valueOf()
     let fecha = fechaPub.valueOf()
 
