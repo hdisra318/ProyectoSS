@@ -15,34 +15,36 @@
         <!-- Agregando barra de encabezado  -->
         <%- include('comunes/heading') %>
 
-        <h1>Registro de libros</h1>
+        <div class="container">
+            <h1>Registro de libros</h1>
 
-        <!-- Formulario -->
-        <form id="datos_publicacion" action="#" method="post">
+            <!-- Formulario -->
+            <form id="datos_publicacion" action="#" method="post">
 
-            <div class="form-group">
-                <label for="titulo_pub">Titulo del libro:</label>
-                <input class="form-control" type="text" name="titulo_pub" id="titulo_pub">
-            </div>
-            
-            <div class="form-group">
-                <label for="autores_pub">Autor(es) del libro:</label>
-                <input class="form-control" type="text" name="autores_pub" id="autores_pub">
-            </div>
-            
-            <div class="form-group">
-                <label for="editorial_pub">Editorial del libro:</label>
-                <input class="form-control" type="text" name="editorial_pub" id="editorial_pub">
-            </div>
-            
-            <div class="form-group">
-                <label for="fecha_pub">Fecha de publicacion del libro:</label>
-                <input class="form-control" type="date" name="fecha_pub" id="fecha_pub">
-            </div>
+                <div class="form-group">
+                    <label for="titulo_pub">Titulo del libro:</label>
+                    <input class="form-control" type="text" name="titulo_pub" id="titulo_pub">
+                </div>
+                
+                <div class="form-group">
+                    <label for="autores_pub">Autor(es) del libro:</label>
+                    <input class="form-control" type="text" name="autores_pub" id="autores_pub">
+                </div>
+                
+                <div class="form-group">
+                    <label for="editorial_pub">Editorial del libro:</label>
+                    <input class="form-control" type="text" name="editorial_pub" id="editorial_pub">
+                </div>
+                
+                <div class="form-group">
+                    <label for="fecha_pub">Fecha de publicacion del libro:</label>
+                    <input class="form-control" type="date" name="fecha_pub" id="fecha_pub">
+                </div>
 
-            <button class="btn btn-success" id="registrar_pub_btn" type="submit">Registrar</button>
+                <button class="btn btn-success" id="registrar_pub_btn" type="submit">Registrar</button>
 
-        </form>
+            </form>
+        </div>
 
         <!-- Agregando pie de pagina -->
         <%- include('comunes/pie_pagina') %>

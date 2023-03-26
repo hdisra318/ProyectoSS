@@ -5,6 +5,10 @@ router.get('/', (peticion, respuesta) => {
     respuesta.render('index')
 })
 
+router.get('/registro', (peticion, respuesta) => {
+    respuesta.render('registro');
+})
+
 // Peticiones
 // Para crear una publicacion
 router.post('/publicaciones/:titulo/:autores/:editorial/:fecha', (peticion, respuesta) => {
