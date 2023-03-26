@@ -1,0 +1,61 @@
+/* Selecciona el contenedor principal de la vista */
+body {
+    padding: 25px;
+}
+
+/* Selecciona el pie de página especificamente */
+footer {
+    background:lightgray;
+    margin: 10px -25px;
+    padding: 2px 30px 30px;
+}
+
+/* Selecciona los <span> que desciendan de <footer> (aún indirectamente) */
+footer span {
+    width: 25%;
+    display: inline-block;
+    text-align: center;
+}
+
+/* Estilo de los botones en nuestra pagina */
+#registrar_publicacion_button {
+  background-color: #4CAF50; /* Color verde */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+#eliminar_pub_btn {
+  background-color: #008CBA; /* Color rojo */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+/* Estilo de los botones al pasar el mouse por ellos */
+#registrar_publicacion_button:hover {
+  .button {
+    background-color: #555555;
+  } /* Color negro */
+  color: white;
+}
+
+#eliminar_pub_btn:hover {
+  .button {
+    background-color: #555555;
+  } /* Color negro */
+  color: white;
+}
+
+/* Estilos para las tablas */
+table, th, td {
+  border: 1px solid;
+}
