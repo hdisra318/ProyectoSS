@@ -44,7 +44,7 @@
         <script>
             $('eliminar_pub_btn').click(function(eventoClick) {
 
-                if(!confirm('¿Desea borrar el libro? Esta acción no puede deshacerse'))
+                if(!confirm('¿Desea borrar el libro? Esta acción no puede deshacerse.'))
                     return
                 
                 let botonBorrar = $(this)
@@ -54,11 +54,11 @@
                     type: 'DELETE',
                     url: "/publicaciones<%= publicacion.obtenerTitulo() %>",
                     success: function(respuesta) {
-                        alert(`El usuario "${respuesta}" ha sido eliminado`)
+                        alert(`La publicacion "${respuesta}" ha sido eliminada.`)
                         window.location.href = '/'
                     },
                     error: function(ajax, mensaje) {
-                        alert('Ocurrió un problema al borrar el registro del libro')
+                        alert('Ocurrió un problema al borrar el registro del libro.')
                         botonBorrar.prop('disabled', false)
                     }
 
