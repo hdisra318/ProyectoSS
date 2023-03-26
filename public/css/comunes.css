@@ -18,7 +18,7 @@ footer span {
 }
 
 /* Estilo de los botones en nuestra pagina */
-#agregar_publicacion_button {
+#registrar_publicacion_button {
   background-color: #4CAF50; /* Color verde */
   border: none;
   color: white;
@@ -29,7 +29,7 @@ footer span {
   font-size: 16px;
 }
 
-#quitar_publicacion_button {
+#eliminar_pub_btn {
   background-color: #008CBA; /* Color rojo */
   border: none;
   color: white;
@@ -41,12 +41,12 @@ footer span {
 }
 
 /* Estilo de los botones al pasar el mouse por ellos */
-#agregar_publicacion_button:hover {
+#registrar_publicacion_button:hover {
   .button {background-color: #555555;} /* Color negro */
   color: white;
 }
 
-#quitar_publicacion_button:hover {
+#eliminar_pub_btn:hover {
   .button {background-color: #555555;} /* Color negro */
   color: white;
 }
