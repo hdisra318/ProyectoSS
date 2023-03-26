@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <script src="/js/jquery-3.6.4.min.js"></script>
+    <title>Registro de Libros</title>
+</head>
+    <body>
+        
+        <h1>Registro de libros</h1>
+
+        <!-- Formulario -->
+        <form id="datos_publicacion" action="#" method="post">
+
+            <div class="form-group">
+                <label for="titulo_pub">Titulo del libro:</label>
+                <input class="form-control" type="text" name="titulo_pub" id="titulo_pub">
+            </div>
+            
+            <div class="form-group">
+                <label for="autores_pub">Autor(es) del libro:</label>
+                <input class="form-control" type="text" name="autores_pub" id="autores_pub">
+            </div>
+            
+            <div class="form-group">
+                <label for="editorial_pub">Editorial del libro:</label>
+                <input class="form-control" type="text" name="editorial_pub" id="editorial_pub">
+            </div>
+            
+            <div class="form-group">
+                <label for="fecha_pub">Fecha de publicacion del libro:</label>
+                <input class="form-control" type="date" name="fecha_pub" id="fecha_pub">
+            </div>
+
+            <button class="btn btn-success"" type="submit">Registrar</button>
+
+        </form>
+
+        <!-- Agregando pie de pagina -->
+        <%- include('comunes/pie_pagina') %>
+
+        <script>
+            $('#datos_publicacion').submit(function(eventoEnviar) {
+
+                eventoEnviar.preventDefault()
+                
+                // Falta id
+                let tituloPub = $('#titulo_pub')
+                let autoresPub = $('#autores_pub')
+                let editorialPub = $('#editorial_pub')
+                let fechaPub = $('#fecha_pub')
+                let form = $(this)
+
+                $.ajax({
+                    type: 'POST',
+                    url: `/publicaciones/${tituloPub.val()}/${autoresPub.val()}/${editorialPub.val()}
+                    /${fechaPub.val()}`,
+                    data: form.serialize(),
+                    success: function(respuesta) {
+                        tituloPub.val('')
+                        autoresPub.val('')
+                        editorialPub.val('')
+                        fechaPub.val('')
+                        alert(`Libro registrado en "${respuesta}"`)
+                    },
+                    error: function(ajax, mensaje) {
+                        alert('Ocurrió un problema al registrar el libro')
+                    }
+                })
+            })
+        </script>
+
+
+        <!-- Cargando script de bootstrap-->
+        <script src="/js/bootstrap.min.js"></script>
+
+    </body>
+</html>
