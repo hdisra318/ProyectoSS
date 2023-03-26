@@ -17,23 +17,22 @@ function generarUrlBorrado(tituloPub, editorialPub, autoresPub, fechaPub) {
 module.exports = {
 
     crearPublicacion: (peticion, respuesta) => {
-        if (publicaciones[peticion.params.titulo, peticion.params.editorial, peticion.params.editorial, peticion.params.autores, peticion.params.fecha]) {
+        if (publicaciones[peticion.params.id]) {
             respuesta.status(409).json({
-                name: 'Publicacion repetida',
-                message: `Ya existe publicacion con titulo: ${peticion.params.titulo}, autor(es): ${peticion.params.autores}, 
-                editorial: ${peticion.params.editorial} y fecha: ${peticion.params.fecha}`
+                name: 'Id existente',
+                message: `Ya existe publicacion con id: ${peticion.params.id}`
             })
             return
         }
-        publicaciones[peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha] = modeloPublicacion(
-            idC, peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha
+        publicaciones[peticion.params.id] = modeloPublicacion(
+            peticion.params.id, peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha
         )
         let urlNuevaPublicacion = generarUrlRegistro(peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha)
         respuesta.status(201).send(urlNuevaPublicacion)
     },
 
     borrarPublicacion: (peticion, respuesta) => {
-        delete publicaciones[peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha]
+        delete publicaciones[peticion.params.id]
         let urlPublicacionBorrada = generarUrlBorrado(peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha)
         respuesta.send(urlPublicacionBorrada)
     },
@@ -55,28 +54,37 @@ module.exports = {
 
     editarPublicacionTitulo: (peticion, nuevoTitulo, respuesta) => {
 
-        publicaciones[peticion.params.id, peticion.params.titulo, peticion.params.autores, peticion.params.fecha] = modeloPublicacion(
-            peticion.params.id, nuevoTitulo, peticion.params.autores, peticion.params.fecha
+        publicaciones[peticion.params.id] = modeloPublicacion(
+            peticion.params.id, nuevoTitulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha
         )
-        let urlNuevaPublicacion = generarUrl(peticion.id, nuevoTitulo, peticion.params.autores, peticion.params.fecha)
+        let urlNuevaPublicacion = generarUrl(peticion.id)
         respuesta.status(201).send(urlNuevaPublicacion)
     },
 
     editarPublicacionAutor: (peticion, nuevoAutor, respuesta) => {
 
-        publicaciones[peticion.params.id, peticion.params.titulo, peticion.params.autores, peticion.params.fecha] = modeloPublicacion(
-            peticion.params.id, peticion.params.titulo, nuevoAutor, peticion.params.fecha
+        publicaciones[peticion.params.id] = modeloPublicacion(
+            peticion.params.id, peticion.params.titulo, peticion.params.editorial, nuevoAutor, peticion.params.fecha
         )
-        let urlNuevaPublicacion = generarUrl(peticion.id, peticion.params.titulo, nuevoAutor, peticion.params.fecha)
+        let urlNuevaPublicacion = generarUrl(peticion.params.id)
+        respuesta.status(201).send(urlNuevaPublicacion)
+    },
+
+    editarPublicacionEditorial: (peticion, nuevaEditorial, respuesta) => {
+
+        publicaciones[peticion.params.id] = modeloPublicacion(
+            peticion.params.id, peticion.params.titulo, nuevaEditorial, peticion.params.autores, peticion.params.fecha
+        )
+        let urlNuevaPublicacion = generarUrl(peticion.params.id)
         respuesta.status(201).send(urlNuevaPublicacion)
     },
 
     editarPublicacionFecha: (peticion, nuevaFecha, respuesta) => {
 
-        publicaciones[peticion.params.id, peticion.params.titulo, peticion.params.autores, peticion.params.fecha] = modeloPublicacion(
-            peticion.params.id, peticion.params.titulo, peticion.params.autores, nuevaFecha
+        publicaciones[peticion.params.id] = modeloPublicacion(
+            peticion.params.id, peticion.params.titulo, peticion.params.editorial, peticion.params.autores, nuevaFecha
         )
-        let urlNuevaPublicacion = generarUrl(peticion.id, nuevoAutor, peticion.params.autores, peticion.params.fecha)
+        let urlNuevaPublicacion = generarUrl(peticion.params.id)
         respuesta.status(201).send(urlNuevaPublicacion)
     }
 }
