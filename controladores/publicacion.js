@@ -28,13 +28,13 @@ module.exports = {
             idC, peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha
         )
         ++idC
-        let urlNuevaPublicacion = generarUrlRegistro(peticion.params.titulo)
+        let urlNuevaPublicacion = generarUrlRegistro(peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha)
         respuesta.status(201).send(urlNuevaPublicacion)
     },
 
     borrarPublicacion: (peticion, respuesta) => {
         delete publicaciones[peticion.params.titulo]
-        let urlPublicacionBorrada = generarUrlBorrado(peticion.params.titulo)
+        let urlPublicacionBorrada = generarUrlBorrado(peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha)
         respuesta.send(urlPublicacionBorrada)
     },
 
@@ -59,7 +59,7 @@ module.exports = {
             idC, nuevoTitulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha
         )
         ++idC
-        let urlNuevaPublicacion = generarUrl(peticion.titulo)
+        let urlNuevaPublicacion = generarUrlRegistro(peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha)
         respuesta.status(201).send(urlNuevaPublicacion)
     },
 
@@ -69,7 +69,7 @@ module.exports = {
             idC, peticion.params.titulo, peticion.params.editorial, nuevoAutor, peticion.params.fecha
         )
         ++idC
-        let urlNuevaPublicacion = generarUrl(peticion.params.titulo)
+        let urlNuevaPublicacion = generarUrlRegistro(peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha)
         respuesta.status(201).send(urlNuevaPublicacion)
     },
 
@@ -79,7 +79,7 @@ module.exports = {
             idC, peticion.params.titulo, nuevaEditorial, peticion.params.autores, peticion.params.fecha
         )
         ++idC
-        let urlNuevaPublicacion = generarUrl(peticion.params.titulo)
+        let urlNuevaPublicacion = generarUrlRegistro(peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha)
         respuesta.status(201).send(urlNuevaPublicacion)
     },
 
@@ -89,7 +89,7 @@ module.exports = {
             idC, peticion.params.titulo, peticion.params.editorial, peticion.params.autores, nuevaFecha
         )
         ++idC
-        let urlNuevaPublicacion = generarUrl(peticion.params.titulo)
+        let urlNuevaPublicacion = generarUrlRegistro(peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha)
         respuesta.status(201).send(urlNuevaPublicacion)
     }
 }
