@@ -14,6 +14,10 @@ function generarUrlBorrado(tituloPub, editorialPub, autoresPub, fechaPub) {
     return `/publicaciones/${tituloPub}/${autoresPub}/${editorialPub}/${fechaPub}`
 }
 
+function generaUrl(tituloPub) {
+    return `/publicaciones/${tituloPub}`
+}
+
 module.exports = {
 
     crearPublicacion: (peticion, respuesta) => {
@@ -28,7 +32,7 @@ module.exports = {
             idC, peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha
         )
         ++idC
-        let urlNuevaPublicacion = generarUrlRegistro(peticion.params.titulo, peticion.params.editorial, peticion.params.autores, peticion.params.fecha)
+        let urlNuevaPublicacion = generarUrl(peticion.params.titulo)
         respuesta.status(201).send(urlNuevaPublicacion)
     },
 
