@@ -49,7 +49,8 @@
 
                 eventoEnviar.preventDefault()
                 
-                // Falta id
+                // Atributos de la publicación
+                let idPub = $('#id_pub')
                 let tituloPub = $('#titulo_pub')
                 let autoresPub = $('#autores_pub')
                 let fechaPub = $('#fecha_pub')
@@ -66,7 +67,7 @@
                         alert(`Libro registrado en "${respuesta}"`)
                     },
                     error: function(ajax, mensaje) {
-                        alert('Ocurrió un problema al buscar el libro')
+                        alert('Ocurrió un problema al buscar el libro tituloPub.val')
                     }
                 })
             })
