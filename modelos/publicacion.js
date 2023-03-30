@@ -24,6 +24,18 @@ module.exports = (idPub, tituloPub, editorialPub, autoresPub, fechaPub) => {
         obtenerFecha: () => {
             return fecha
         },
+        modificarTitulo: (nuevoTitulo) => {
+            titulo = nuevoTitulo
+        },
+        modificarEditorial: (nuevaEditorial) => {
+            editorial = nuevaEditorial
+        },
+        modificarAutores: (nuevoAutor) => {
+            autores = nuevoAutor
+        },
+        modificarFecha: (nuevaFecha) => {
+            fecha = nuevaFecha
+        },
         toString: () => {
             return `${titulo}: ${autores}, ${editorial}, ${fecha}`
         }

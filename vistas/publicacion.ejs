@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-    <!--<link rel="stylesheet" type="text/css" href="/css/comunes.css">-->
+    <link rel="stylesheet" type="text/css" href="/css/comunes.css">
     <script src="/js/jquery-3.6.4.min.js"></script>
     <title>
         Información del libro <%= `"${publicacion.obtenerTitulo()}"` %>
@@ -17,7 +17,7 @@
         <!-- Agregando barra de encabezado  -->
         <%- include('comunes/heading') %>
 
-        <div class="container" style="max-width: 70%; min-height: 100%;">
+        <div class="container contenedor" style="max-width: 70%; min-height: 100%;">
             <table class="table table-bordered table-hover">
                 <thead class="thead-light">
                     <tr>
@@ -26,6 +26,7 @@
                         <th>Autor(es)</th>
                         <th>Editorial</th>
                         <th>Fecha de publicacion</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,19 +36,43 @@
                         <td><%= publicacion.obtenerAutores() %></td>
                         <td><%= publicacion.obtenerEditorial() %></td>
                         <td><%= publicacion.obtenerFecha() %></td>
+                        
+                        <!-- Boton para mostrar los detalles del libro -->
+                        <td>
+                            <button id="detalles_btn" type="button" name="detalles_btn"
+                                class="btn btn-success" >
+                                Detalles
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
                 
             </table>
-
-            <!-- Boton para mostrar los detalles del libro -->
-            <a class="btn btn-success" href="/detalle">Detalles</a>
 
 
         </div>
 
         <!-- Agregando el fotter -->
         <%- include('comunes/pie_pagina') %>
+
+
+        <script>
+            $('#detalles_btn').click(function(eventoClick) {
+                
+                $.ajax({
+                    type: 'GET',
+                    url: '/detalle/<%= publicacion.obtenerTitulo() %>',
+                    success: function(respuesta) {
+                        window.location.href = '/detalle/<%= publicacion.obtenerTitulo() %>'
+                    },
+                    error: function(ajax, mensaje) {
+                        alert('Ocurrió un problema al cargar los detalles del libro.')
+                    }
+                })
+
+            })
+        </script>
+
 
 
         <!-- Cargando script de bootstrap-->
