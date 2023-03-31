@@ -16,32 +16,32 @@
         <%- include('comunes/heading') %>
 
         <div class="container contenedor">
-            <h1>Registro de libros</h1>
+            <h1>Editar libro: <%= `"${publicacion.obtenerTitulo()}"` %></h1>
 
             <!-- Formulario -->
             <form id="datos_publicacion" action="#" method="post">
 
                 <div class="form-group entrada-form">
                     <label for="titulo_pub">Titulo del libro:</label>
-                    <input class="form-control" type="text" name="titulo_pub" id="titulo_pub">
+                    <input class="form-control" type="text" name="titulo_pub" id="titulo_pub" placeholder="<%= publicacion.obtenerTitulo() %>">
                 </div>
                 
                 <div class="form-group entrada-form">
                     <label for="autores_pub">Autor(es) del libro:</label>
-                    <input class="form-control" type="text" name="autores_pub" id="autores_pub">
+                    <input class="form-control" type="text" name="autores_pub" id="autores_pub" placeholder="<%= publicacion.obtenerAutores() %>">
                 </div>
                 
                 <div class="form-group entrada-form">
                     <label for="editorial_pub">Editorial del libro:</label>
-                    <input class="form-control" type="text" name="editorial_pub" id="editorial_pub">
+                    <input class="form-control" type="text" name="editorial_pub" id="editorial_pub" placeholder="<%= publicacion.obtenerEditorial() %>">
                 </div>
                 
                 <div class="form-group entrada-form">
                     <label for="fecha_pub">Fecha de publicacion del libro:</label>
-                    <input class="form-control" type="date" name="fecha_pub" id="fecha_pub">
+                    <input class="form-control" type="date" name="fecha_pub" id="fecha_pub" placeholder="<%= publicacion.obtenerEditorial() %>">
                 </div>
 
-                <button class="btn btn-success boton" id="registrar_pub_btn" type="submit">Registrar</button>
+                <button class="btn btn-success boton" id="registrar_pub_btn" type="submit">Editar</button>
 
             </form>
         </div>
@@ -62,20 +62,22 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: `/publicaciones/${tituloPub.val()}`,
+                    url: `/editar/<%= publicacion.obtenerId()%>/<%= publicacion.obtenerTitulo()%>/${tituloPub.val()}/${autoresPub.val()}/${editorialPub.val()}/${fechaPub.val()}`,
                     data: form.serialize(),
                     success: function(respuesta) {
+
+                        alert(`Libro actualizado`)
+                        // Cargar la vista donde esta la publicacion
+                        window.location.href = `/publicaciones/${tituloPub.val()}`
 
                         tituloPub.val('')
                         autoresPub.val('')
                         editorialPub.val('')
                         fechaPub.val('')
                         
-                        window.location.href = `/detalle/${tituloPub.val()}`
-                        alert(`Libro registrado en "${respuesta}"`)
                     },
                     error: function(ajax, mensaje) {
-                        alert('Ocurrió un problema al registrar el libro')
+                        alert('Ocurrió un problema al editar la información el libro')
                     }
                 })
             })

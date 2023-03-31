@@ -17,7 +17,12 @@
         <!-- Agregando barra de encabezado  -->
         <%- include('comunes/heading') %>
 
-        <div class="container contenedor" style="max-width: 70%; min-height: 100%;">
+        <div class="container contenedor">
+
+            <h2>Búsqueda de: <%= `"${publicacion.obtenerTitulo()}"` %></h2>
+
+            <br>
+
             <table class="table table-bordered table-hover">
                 <thead class="thead-light">
                     <tr>

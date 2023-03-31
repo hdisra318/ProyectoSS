@@ -42,9 +42,14 @@ router.get('/detalle/:titulo', (peticion, respuesta) => {
     controladorPublicaciones.obtenerPublicacionDetalle(peticion, respuesta)
 })
 
-// Para actualizar (editar) una publicacion
+// Para la vista de editar
 router.get('/editar/:titulo', (peticion, respuesta) => {
     controladorPublicaciones.obtenerPublicacionEditar(peticion, respuesta)
+})
+
+// Para actualizar(editar) la informacion del libro
+router.post('/editar/:id/:tituloAnt/:titulo/:autores/:editorial/:fecha', (peticion, respuesta) => {
+    controladorPublicaciones.editarPublicacion(peticion, respuesta)
 })
 
 module.exports = router
