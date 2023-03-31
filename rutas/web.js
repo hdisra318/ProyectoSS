@@ -13,6 +13,14 @@ router.get('/publicacion', (peticion, respuesta) => {
     respuesta.render('publicacion');
 })
 
+router.get('/detalle', (peticion, respuesta) => {
+    respuesta.render('detalle');
+})
+
+router.get('/editar', (peticion, respuesta) => {
+    respuesta.render('editar');
+})
+
 // Peticiones
 // Para crear una publicacion
 router.post('/publicaciones/:titulo/:autores/:editorial/:fecha', (peticion, respuesta) => {
@@ -20,7 +28,7 @@ router.post('/publicaciones/:titulo/:autores/:editorial/:fecha', (peticion, resp
 })
 
 // Para eliminar una publicacion
-router.delete('/publicaciones/:titulo/:autores/:editorial/:fecha', (peticion, respuesta) => {
+router.delete('/publicaciones/:titulo', (peticion, respuesta) => {
     controladorPublicaciones.borrarPublicacion(peticion, respuesta)
 })
 
@@ -29,9 +37,19 @@ router.get('/publicaciones/:titulo', (peticion, respuesta) => {
     controladorPublicaciones.obtenerPublicacion(peticion, respuesta)
 })
 
+// Para los detalles una publicacion
+router.get('/detalle/:titulo', (peticion, respuesta) => {
+    controladorPublicaciones.obtenerPublicacionDetalle(peticion, respuesta)
+})
 
-// Para actualizar (editar) una publicacion
+// Para la vista de editar
+router.get('/editar/:titulo', (peticion, respuesta) => {
+    controladorPublicaciones.obtenerPublicacionEditar(peticion, respuesta)
+})
 
-
+// Para actualizar(editar) la informacion del libro
+router.post('/editar/:id/:tituloAnt/:titulo/:autores/:editorial/:fecha', (peticion, respuesta) => {
+    controladorPublicaciones.editarPublicacion(peticion, respuesta)
+})
 
 module.exports = router

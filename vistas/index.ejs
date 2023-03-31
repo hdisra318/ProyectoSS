@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-    <!--<link rel="stylesheet" type="text/css" href="/css/comunes.css">-->
+    <link rel="stylesheet" type="text/css" href="/css/comunes.css">
     <script src="/js/jquery-3.6.4.min.js"></script>
     <title>Búsqueda de Libros</title>
 </head>
@@ -15,28 +15,28 @@
         <!-- Agregando barra de encabezado  -->
         <%- include('comunes/heading') %>
 
-        <div class="container">
+        <div class="container contenedor">
             <h1>Búsqueda de libros</h1>
 
             <!-- Formulario -->
             <form id="datos_publicacion" action="#" method="post">
 
-                <div class="form-group">
+                <div class="form-group entrada-form">
                     <label for="titulo_pub">Titulo del libro:</label>
                     <input class="form-control" type="text" name="titulo_pub" id="titulo_pub">
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group entrada-form">
                     <label for="autores_pub">Autor(es) del libro:</label>
                     <input class="form-control" type="text" name="autores_pub" id="autores_pub">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group entrada-form">
                     <label for="fecha_pub">Fecha de publicacion del libro:</label>
                     <input class="form-control" type="date" name="fecha_pub" id="fecha_pub">
                 </div>
 
-                <button class="btn btn-success" id="buscar_pub_btn" type="submit">Buscar</button>
+                <button class="btn btn-primary boton" id="buscar_pub_btn" type="submit">Buscar</button>
 
             </form>
 
@@ -49,8 +49,6 @@
 
                 eventoEnviar.preventDefault()
                 
-                // Atributos de la publicación
-                let idPub = $('#id_pub')
                 let tituloPub = $('#titulo_pub')
                 let autoresPub = $('#autores_pub')
                 let fechaPub = $('#fecha_pub')
@@ -58,16 +56,20 @@
 
                 $.ajax({
                     type: 'GET',
-                    url: `/publicaciones/${tituloPub.val()}/${autoresPub.val()}/${fechaPub.val()}`,
+                    url: `/publicaciones/${tituloPub.val()}`,
                     data: form.serialize(),
                     success: function(respuesta) {
+                        
+                        // Cargar la vista donde esta la publicacion
+                        window.location.href = `/publicaciones/${tituloPub.val()}`
+                        
                         tituloPub.val('')
                         autoresPub.val('')
                         fechaPub.val('')
-                        alert(`Libro registrado en "${respuesta}"`)
+                        
                     },
                     error: function(ajax, mensaje) {
-                        alert('Ocurrió un problema al buscar el libro ' tituloPub.val())
+                        alert('Ocurrió un problema al buscar el libro')
                     }
                 })
             })

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-    <!--<link rel="stylesheet" type="text/css" href="/css/comunes.css">-->
+    <link rel="stylesheet" type="text/css" href="/css/comunes.css">
     <script src="/js/jquery-3.6.4.min.js"></script>
     <title>
         Detalle del libro <%= `"${publicacion.obtenerTitulo()}"` %>
@@ -17,15 +17,20 @@
         <!-- Agregando barra de encabezado  -->
         <%- include('comunes/heading') %>
 
-        <div class="container" style="max-width: 70%; min-height: 100%;">
-            <table class="table table-bordered table-hover">
-                <thead class="thead-light">
+        <div class="container contenedor">
+
+            <h2>Detalles del libro <%= `"${publicacion.obtenerTitulo()}"` %></h2>
+
+            <br>
+
+            <table class="table table-light table-hover">
+                <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Titulo</th>
-                        <th>Autor(es)</th>
-                        <th>Editorial</th>
-                        <th>Fecha de publicacion</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Titulo</th>
+                        <th scope="col">Autor(es)</th>
+                        <th scope="col">Editorial</th>
+                        <th scope="col">Fecha de publicación</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,8 +42,9 @@
                         <td><%= publicacion.obtenerFecha() %></td>
                     </tr>
                 </tbody>
-                
             </table>
+
+            <br>
 
             <!-- Botones para borrar y editar los detalles del libro -->
             <button id="eliminar_pub_btn" type="button" name="eliminar_pub_btn"
@@ -46,15 +52,19 @@
                 Borrar libro
             </button>
             
-            <a class="btn btn-success" href="/edit">Editar libro</a>
+            <button id="editar_btn" type="button" name="editar_btn"
+                    class="btn btn-success" >
+                Editar Libro
+            </button>
 
         </div>
 
         <!-- Agregando el fotter -->
         <%- include('comunes/pie_pagina') %>
 
-        <script >
-            $('#eliminar_usr_btn').click(function(eventoClick) {
+        <script>
+            $('#eliminar_pub_btn').click(function(eventoClick) {
+
                 if (!confirm('¿Borrar? Esta acción no puede deshacerse')) return
                 let botonBorrar = $(this)
                 botonBorrar.prop('disabled', true)
@@ -62,7 +72,7 @@
                 botonBorrar.addClass('btn-secondary')
                 $.ajax({
                     type: 'DELETE',
-                    url: "/publicaiones/<%= usuario.obtenerId() %>",
+                    url: "/publicaciones/<%= publicacion.obtenerTitulo() %>",
                     success: function(respuesta) {
                         alert(`El libro "${respuesta}" ha sido eliminado.`)
                         window.location.href = '/'
@@ -75,9 +85,22 @@
                     }
                 })
             })
+
+            $('#editar_btn').click(function(eventoClick) {
+                
+                $.ajax({
+                    type: 'GET',
+                    url: '/editar/<%= publicacion.obtenerTitulo() %>',
+                    success: function(respuesta) {
+                        window.location.href = '/editar/<%= publicacion.obtenerTitulo() %>'
+                    },
+                    error: function(ajax, mensaje) {
+                        alert('Ocurrió un problema al cargar los detalles del libro.')
+                    }
+                })
+
+            })
         </script>
-
-
 
 
         <!-- Cargando script de bootstrap-->

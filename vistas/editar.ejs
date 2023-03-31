@@ -6,42 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-    <!--<link rel="stylesheet" type="text/css" href="/css/comunes.css">-->
+    <link rel="stylesheet" type="text/css" href="/css/comunes.css">
     <script src="/js/jquery-3.6.4.min.js"></script>
-    <title>Edición de Libros</title>
+    <title>Editar información del libro <%= `"${publicacion.obtenerTitulo()}"` %></title>
 </head>
     <body>
         
         <!-- Agregando barra de encabezado  -->
         <%- include('comunes/heading') %>
 
-        <div class="container">
-            <h1>Editar libro</h1>
+        <div class="container contenedor">
+            <h1>Editar libro: <%= `"${publicacion.obtenerTitulo()}"` %></h1>
 
             <!-- Formulario -->
             <form id="datos_publicacion" action="#" method="post">
 
-                <div class="form-group">
+                <div class="form-group entrada-form">
                     <label for="titulo_pub">Titulo del libro:</label>
-                    <input class="form-control" type="text" name="titulo_pub" id="titulo_pub">
+                    <input class="form-control" type="text" name="titulo_pub" id="titulo_pub" placeholder="<%= publicacion.obtenerTitulo() %>">
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group entrada-form">
                     <label for="autores_pub">Autor(es) del libro:</label>
-                    <input class="form-control" type="text" name="autores_pub" id="autores_pub">
+                    <input class="form-control" type="text" name="autores_pub" id="autores_pub" placeholder="<%= publicacion.obtenerAutores() %>">
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group entrada-form">
                     <label for="editorial_pub">Editorial del libro:</label>
-                    <input class="form-control" type="text" name="editorial_pub" id="editorial_pub">
+                    <input class="form-control" type="text" name="editorial_pub" id="editorial_pub" placeholder="<%= publicacion.obtenerEditorial() %>">
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group entrada-form">
                     <label for="fecha_pub">Fecha de publicacion del libro:</label>
-                    <input class="form-control" type="date" name="fecha_pub" id="fecha_pub">
+                    <input class="form-control" type="date" name="fecha_pub" id="fecha_pub" placeholder="<%= publicacion.obtenerEditorial() %>">
                 </div>
 
-                <button class="btn btn-success" id="registrar_pub_btn" type="submit">Editar</button>
+                <button class="btn btn-success boton" id="registrar_pub_btn" type="submit">Editar</button>
 
             </form>
         </div>
@@ -54,7 +54,6 @@
 
                 eventoEnviar.preventDefault()
                 
-                // Falta id
                 let tituloPub = $('#titulo_pub')
                 let autoresPub = $('#autores_pub')
                 let editorialPub = $('#editorial_pub')
@@ -63,17 +62,22 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: `/publicaciones/${tituloPub.val()}/${autoresPub.val()}/${editorialPub.val()}/${fechaPub.val()}`,
+                    url: `/editar/<%= publicacion.obtenerId()%>/<%= publicacion.obtenerTitulo()%>/${tituloPub.val()}/${autoresPub.val()}/${editorialPub.val()}/${fechaPub.val()}`,
                     data: form.serialize(),
                     success: function(respuesta) {
+
+                        alert(`Libro actualizado`)
+                        // Cargar la vista donde esta la publicacion
+                        window.location.href = `/publicaciones/${tituloPub.val()}`
+
                         tituloPub.val('')
                         autoresPub.val('')
                         editorialPub.val('')
                         fechaPub.val('')
-                        alert(`Libro registrado en "${respuesta}"`)
+                        
                     },
                     error: function(ajax, mensaje) {
-                        alert('Ocurrió un problema al editar el libro')
+                        alert('Ocurrió un problema al editar la información el libro')
                     }
                 })
             })
